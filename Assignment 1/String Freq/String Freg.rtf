@@ -1,0 +1,104 @@
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct TokenFreq{
+
+    string token;
+	int freq;
+};
+
+//void getLeastFreqLetter(string& s);
+
+vector<TokenFreq> getTokenFreq(string& s);
+
+
+int main()
+{
+    string s;
+    vector<TokenFreq> vecWords;
+    
+    getline(cin,s);
+    
+    vecWords = getTokenFreq(s);
+	
+	int size = vecWords.size();
+	
+	for(int i = 0; i < size; i++){
+		cout<<" \'"<<vecWords[i].token<<"\': ";
+		cout<<vecWords[i].freq<<",";
+	} 
+
+}
+
+/**void getLeastFreqLetter(string& s){
+	
+	
+}*/
+
+vector<TokenFreq> getTokenFreq(string& s){
+	
+	int size = s.size();
+	int i = 0,count = 0;
+	string strWords[500];
+	vector<TokenFreq> tokenFreq;
+
+
+	while(i<size){
+		if(s[i] == ' ' || s[i] == ',' || s[i] == '.'){
+			count+=1;
+			i++;
+		}
+		else{
+		    strWords[count] += s[i];
+		    i++;
+		}
+	}
+		
+	
+	for (int j = 0; j < count;){
+		if (strWords[j] == ""){
+			j++;
+		}
+		else{
+			int freq=1;
+		    for(int k = j+1; k < count; k ++){
+		    	if(strWords[j] == strWords[k]){
+					strWords[k] = "";
+					freq++;
+				}
+			}
+			tokenFreq.push_back({strWords[j],freq});
+			j++;
+		}
+		
+				
+	}
+	return tokenFreq;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
